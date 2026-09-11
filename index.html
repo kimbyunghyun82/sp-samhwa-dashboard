@@ -75,7 +75,10 @@
     --period-text:     #86b6ef;
   }
 
-  body { background: var(--page); margin: 0; font-family: 'Malgun Gothic','Apple SD Gothic Neo',system-ui,sans-serif; color: var(--text-primary); }
+  body { background: var(--page); margin: 0; font-family: 'Malgun Gothic','Apple SD Gothic Neo',system-ui,sans-serif; color: var(--text-primary); scroll-behavior: smooth; }
+  .product-row { scroll-margin-top: 24px; }
+  .product-row.flash { animation: flash-highlight 1.6s ease; }
+  @keyframes flash-highlight { 0%,100% { background: transparent; } 20% { background: var(--period-bg); } }
   .scroller { overflow-x: auto; }
   a { color: var(--text-secondary); text-decoration: none; }
   a:hover { color: var(--text-primary); }
@@ -155,7 +158,7 @@
     </div>
 
     <!-- Product 1: 아이생각 팡이닥터 (실사진) -->
-    <div class="product-row">
+    <div class="product-row" id="product-pangidoctor">
       <div style="display:flex; gap:10px;">
         <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
           <div class="photo-ph" style="width:64px; height:64px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></div>
@@ -206,7 +209,7 @@
     </div>
 
     <!-- Product 2: 아이생각 수성내부 프로 (실사진) -->
-    <div class="product-row">
+    <div class="product-row" id="product-sooseongpro">
       <div style="display:flex; gap:10px;">
         <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
           <div class="photo-ph" style="width:64px; height:64px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></div>
@@ -257,7 +260,7 @@
     </div>
 
     <!-- Product 3: 아이생각 원코트 (사진 미확보) -->
-    <div class="product-row">
+    <div class="product-row" id="product-onecoat">
       <div style="display:flex; gap:10px;">
         <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
           <div class="photo-ph" style="width:64px; height:64px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></div>
@@ -308,7 +311,7 @@
     </div>
 
     <!-- Product 4: 방수에이스 (사진 미확보) -->
-    <div class="product-row">
+    <div class="product-row" id="product-bangsuace">
       <div style="display:flex; gap:10px;">
         <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
           <div class="photo-ph" style="width:64px; height:64px;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></div>
@@ -377,7 +380,7 @@
           <span class="bar-track" style="flex:1; height:6px; max-width:120px;"><span class="bar-fill" style="width:70%;"></span></span>
         </div>
         <div class="meta">
-          <span class="src-example"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>예시 데이터</span>
+          <a class="src" href="#product-pangidoctor"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>근거 데이터 보기 (팡이닥터 ↓)</a>
           <span class="report"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22V15"/></svg>오류 신고</span>
         </div>
       </div>
@@ -390,7 +393,7 @@
           <span class="bar-track" style="flex:1; height:6px; max-width:120px;"><span class="bar-fill" style="width:55%;"></span></span>
         </div>
         <div class="meta">
-          <span class="src-example"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>예시 데이터</span>
+          <a class="src" href="#product-onecoat"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>근거 데이터 보기 (원코트 ↓)</a>
           <span class="report"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22V15"/></svg>오류 신고</span>
         </div>
       </div>
@@ -403,7 +406,7 @@
           <span class="bar-track" style="flex:1; height:6px; max-width:120px;"><span class="bar-fill" style="width:45%;"></span></span>
         </div>
         <div class="meta">
-          <span class="src-example"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>예시 데이터</span>
+          <a class="src" href="#product-bangsuace"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>근거 데이터 보기 (방수에이스 ↓)</a>
           <span class="report"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22V15"/></svg>오류 신고</span>
         </div>
       </div>
@@ -416,7 +419,7 @@
           <span class="bar-track" style="flex:1; height:6px; max-width:120px;"><span class="bar-fill" style="width:38%;"></span></span>
         </div>
         <div class="meta">
-          <span class="src-example"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>예시 데이터</span>
+          <a class="src" href="#product-sooseongpro"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>근거 데이터 보기 (수성내부 프로 ↓)</a>
           <span class="report"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22V15"/></svg>오류 신고</span>
         </div>
       </div>
@@ -613,3 +616,19 @@
 
 </div>
 </div>
+
+<script>
+(function () {
+  function flashTarget() {
+    var id = location.hash.slice(1);
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.classList.remove('flash');
+    void el.offsetWidth;
+    el.classList.add('flash');
+  }
+  window.addEventListener('hashchange', flashTarget);
+  if (location.hash) setTimeout(flashTarget, 50);
+})();
+</script>
