@@ -113,6 +113,9 @@
   .nav-item svg { flex-shrink: 0; opacity: .85; }
   .nav-item.active { background: var(--jade-soft); color: var(--jade); font-weight: 700; }
   .nav-item.active svg { opacity: 1; }
+  .nav-item { cursor: pointer; text-decoration: none; }
+  .nav-item:hover { background: var(--surface-soft); text-decoration: none; }
+  .nav-item.active:hover { background: var(--jade-soft); }
   .main { flex: 1; min-width: 0; padding: 24px 32px 64px; }
 
   /* Legend */
@@ -339,16 +342,17 @@
   <div class="app-body">
     <!-- Sidebar -->
     <div class="sidebar">
-      <div class="nav-item active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V9.5Z"/></svg>홈</div>
-      <div class="nav-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>제품 분석</div>
-      <div class="nav-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>지역 분석</div>
-      <div class="nav-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="4"/><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>경쟁사 분석</div>
-      <div class="nav-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h1l3 5h2l-1-5h6l6 3V6l-6 3H8L5 8H4a1 1 0 0 0-1 1v2Z"/></svg>마케팅 제안</div>
-      <div class="nav-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .35 1.9l.05.05a2 2 0 1 1-2.85 2.85l-.05-.05a1.7 1.7 0 0 0-1.9-.35 1.7 1.7 0 0 0-1 1.55V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.9.35l-.05.05a2 2 0 1 1-2.85-2.85l.05-.05a1.7 1.7 0 0 0 .35-1.9 1.7 1.7 0 0 0-1.55-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.55-1 1.7 1.7 0 0 0-.35-1.9l-.05-.05a2 2 0 1 1 2.85-2.85l.05.05a1.7 1.7 0 0 0 1.9.35H9a1.7 1.7 0 0 0 1-1.55V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.9-.35l.05-.05a2 2 0 1 1 2.85 2.85l-.05.05a1.7 1.7 0 0 0-.35 1.9V9a1.7 1.7 0 0 0 1.55 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.55 1Z"/></svg>설정</div>
+      <a class="nav-item active" href="#top" data-nav="home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5V21a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1V9.5Z"/></svg>홈</a>
+      <a class="nav-item" href="#kpi-pangidoctor" data-nav="product"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><rect x="7" y="12" width="3" height="6"/><rect x="12" y="8" width="3" height="10"/><rect x="17" y="5" width="3" height="13"/></svg>제품 분석</a>
+      <a class="nav-item" href="#region-panel" data-nav="region"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></svg>지역 분석</a>
+      <a class="nav-item" href="#competitor-panel" data-nav="competitor"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="7" r="4"/><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>경쟁사 분석</a>
+      <a class="nav-item" href="#marketing-panel" data-nav="marketing"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 0 0 1 1h1l3 5h2l-1-5h6l6 3V6l-6 3H8L5 8H4a1 1 0 0 0-1 1v2Z"/></svg>마케팅 제안</a>
+      <a class="nav-item" href="#" data-nav="settings"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .35 1.9l.05.05a2 2 0 1 1-2.85 2.85l-.05-.05a1.7 1.7 0 0 0-1.9-.35 1.7 1.7 0 0 0-1 1.55V21a2 2 0 0 1-4 0v-.1a1.7 1.7 0 0 0-1-1.55 1.7 1.7 0 0 0-1.9.35l-.05.05a2 2 0 1 1-2.85-2.85l.05-.05a1.7 1.7 0 0 0 .35-1.9 1.7 1.7 0 0 0-1.55-1H3a2 2 0 0 1 0-4h.1a1.7 1.7 0 0 0 1.55-1 1.7 1.7 0 0 0-.35-1.9l-.05-.05a2 2 0 1 1 2.85-2.85l.05.05a1.7 1.7 0 0 0 1.9.35H9a1.7 1.7 0 0 0 1-1.55V3a2 2 0 0 1 4 0v.1a1.7 1.7 0 0 0 1 1.55 1.7 1.7 0 0 0 1.9-.35l.05-.05a2 2 0 1 1 2.85 2.85l-.05.05a1.7 1.7 0 0 0-.35 1.9V9a1.7 1.7 0 0 0 1.55 1H21a2 2 0 0 1 0 4h-.1a1.7 1.7 0 0 0-1.55 1Z"/></svg>설정</a>
     </div>
 
     <!-- Main -->
     <div class="main">
+      <span id="top" style="position:absolute; top:0;"></span>
 
       <div class="legend-bar">
         <span class="legend-badge"><span class="legend-dot legend-dot--real"></span>실제 출처 링크 (클릭 가능)</span>
@@ -986,6 +990,52 @@
   }
   window.addEventListener('hashchange', flashTarget);
   if (location.hash) setTimeout(flashTarget, 50);
+})();
+</script>
+
+<script>
+(function () {
+  var navItems = Array.prototype.slice.call(document.querySelectorAll('.nav-item'));
+  var navTargets = [
+    { nav: 'home', id: 'top' },
+    { nav: 'product', id: 'kpi-pangidoctor' },
+    { nav: 'region', id: 'region-panel' },
+    { nav: 'competitor', id: 'competitor-panel' },
+    { nav: 'marketing', id: 'marketing-panel' }
+  ];
+
+  function setActiveNav(navKey) {
+    navItems.forEach(function (a) {
+      a.classList.toggle('active', a.getAttribute('data-nav') === navKey);
+    });
+  }
+
+  navItems.forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var nav = a.getAttribute('data-nav');
+      if (nav === 'settings') {
+        e.preventDefault();
+        setActiveNav('settings');
+        return;
+      }
+      setActiveNav(nav);
+    });
+  });
+
+  function updateOnScroll() {
+    var offset = 110;
+    var current = 'home';
+    for (var i = 0; i < navTargets.length; i++) {
+      var el = document.getElementById(navTargets[i].id);
+      if (el && el.getBoundingClientRect().top - offset <= 0) {
+        current = navTargets[i].nav;
+      }
+    }
+    setActiveNav(current);
+  }
+
+  window.addEventListener('scroll', updateOnScroll, { passive: true });
+  updateOnScroll();
 })();
 </script>
 
