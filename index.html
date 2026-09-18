@@ -221,6 +221,18 @@
   .content-tile-title { font-size: 11.5px; font-weight: 600; color: var(--ink); line-height: 1.4; }
   .content-tile-body svg { flex-shrink: 0; color: var(--ink-faint); }
 
+  /* Video card grid (경쟁사 유튜브 콘텐츠) */
+  .video-card-grid { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; margin-bottom: 8px; }
+  .video-card { display: block; border-radius: 14px; overflow: hidden; background: var(--surface); border: 1px solid var(--line-soft); box-shadow: var(--shadow-1); color: var(--ink); transition: box-shadow .15s ease; }
+  .video-card:hover { box-shadow: var(--shadow-2); text-decoration: none; }
+  .video-thumb { position: relative; width: 100%; aspect-ratio: 16 / 9; background: var(--surface-soft); overflow: hidden; }
+  .video-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .video-rank { position: absolute; top: 8px; left: 8px; z-index: 1; width: 24px; height: 24px; border-radius: 50%; background: rgba(23,93,82,.92); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; }
+  .video-body { padding: 12px 14px 14px; }
+  .video-title { font-size: 12px; font-weight: 600; color: var(--ink); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; min-height: 2.8em; }
+  .video-meta { display: flex; justify-content: space-between; align-items: center; margin-top: 9px; font-size: 10.5px; color: var(--ink-faint); }
+  .video-brand-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; margin-right: 5px; }
+
   /* Quick menu */
   .quick-menu { display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); gap: 14px; margin-bottom: 8px; }
   .quick-item { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 15px 6px; border-radius: 12px; border: 1px solid var(--line-soft); background: var(--surface); font-size: 10.5px; color: var(--ink-soft); font-weight: 600; text-align: center; }
@@ -748,7 +760,7 @@
       <div class="section-kicker" id="competitor-panel">
         <span class="kicker-label">경쟁사 분석<span class="kicker-note">국내 주요 도료업체 전체 · 노루페인트 · KCC 포함 · 최신순 (09-18 기준 최신 확인)</span></span>
       </div>
-      <div class="grid-3">
+      <div class="grid-2">
 
         <div class="panel">
           <div class="panel-head"><span class="panel-title">신제품 출시 정보</span><span class="panel-note" id="panel-launch-note">예시</span></div>
@@ -790,52 +802,6 @@
         </div>
 
         <div class="panel">
-          <div class="panel-head"><span class="panel-title">신규 콘텐츠 정보</span><span class="panel-note" id="panel-content-note">조회수 ↓ 정렬 · 예시</span></div>
-          <div id="panel-content-rows">
-          <div class="content-row">
-            <span class="rank-chip rank-chip--top mono">1</span>
-            <div class="photo-frame" style="width:40px; height:40px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></div>
-            <div style="flex:1; min-width:0;">
-              <div class="content-title">'클라우드 댄서' 언박싱 영상</div>
-              <div class="content-body">노루페인트 · 유튜브</div>
-              <span class="meter" style="display:block; margin-top:6px;"><span class="meter-fill" style="width:100%;"></span></span>
-            </div>
-            <span class="content-views mono">128,400</span>
-          </div>
-          <div class="content-row">
-            <span class="rank-chip mono">2</span>
-            <div class="photo-frame" style="width:40px; height:40px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></div>
-            <div style="flex:1; min-width:0;">
-              <div class="content-title">숲으로 실크 시공 노하우 포스팅</div>
-              <div class="content-body">KCC · 블로그</div>
-              <span class="meter" style="display:block; margin-top:6px;"><span class="meter-fill" style="width:59%;"></span></span>
-            </div>
-            <span class="content-views mono">76,200</span>
-          </div>
-          <div class="content-row">
-            <span class="rank-chip mono">3</span>
-            <div class="photo-frame" style="width:40px; height:40px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></div>
-            <div style="flex:1; min-width:0;">
-              <div class="content-title">2026 팬톤 컬러 트렌드 카드뉴스</div>
-              <div class="content-body">노루페인트 · 인스타그램</div>
-              <span class="meter" style="display:block; margin-top:6px;"><span class="meter-fill" style="width:43%;"></span></span>
-            </div>
-            <span class="content-views mono">54,900</span>
-          </div>
-          <div class="content-row">
-            <span class="rank-chip mono">4</span>
-            <div class="photo-frame" style="width:40px; height:40px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></div>
-            <div style="flex:1; min-width:0;">
-              <div class="content-title">브랜드 캠페인 영상</div>
-              <div class="content-body">KCC · 유튜브</div>
-              <span class="meter" style="display:block; margin-top:6px;"><span class="meter-fill" style="width:32%;"></span></span>
-            </div>
-            <span class="content-views mono">41,300</span>
-          </div>
-          </div>
-        </div>
-
-        <div class="panel">
           <div class="panel-head"><span class="panel-title">최신 언론보도 자료</span><span class="panel-note" id="panel-press-note">실제 기사</span></div>
           <div id="panel-press-rows">
           <div class="news-row" style="align-items:flex-start;">
@@ -871,6 +837,41 @@
           </div>
         </div>
 
+      </div>
+
+      <div class="section-kicker" style="margin-top:24px;">
+        <span class="kicker-label">경쟁사 유튜브 콘텐츠</span>
+        <span class="period-pill" id="panel-video-note">조회수 ↓ 정렬 · 예시</span>
+      </div>
+      <div class="video-card-grid" id="panel-video-grid">
+        <a class="video-card" href="#" target="_blank" rel="noopener">
+          <div class="video-thumb"><span class="video-rank mono">1</span><div class="photo-frame" style="width:100%; height:100%; border-radius:0;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></div></div>
+          <div class="video-body">
+            <div class="video-title">'클라우드 댄서' 언박싱 영상</div>
+            <div class="video-meta"><span><span class="video-brand-dot" style="background:var(--noroo);"></span>노루페인트</span><span class="mono">128,400회</span></div>
+          </div>
+        </a>
+        <a class="video-card" href="#" target="_blank" rel="noopener">
+          <div class="video-thumb"><span class="video-rank mono">2</span><div class="photo-frame" style="width:100%; height:100%; border-radius:0;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></div></div>
+          <div class="video-body">
+            <div class="video-title">숲으로 실크 시공 노하우 리뷰</div>
+            <div class="video-meta"><span><span class="video-brand-dot" style="background:var(--kcc);"></span>KCC</span><span class="mono">76,200회</span></div>
+          </div>
+        </a>
+        <a class="video-card" href="#" target="_blank" rel="noopener">
+          <div class="video-thumb"><span class="video-rank mono">3</span><div class="photo-frame" style="width:100%; height:100%; border-radius:0;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></div></div>
+          <div class="video-body">
+            <div class="video-title">2026 팬톤 컬러 트렌드 카드뉴스</div>
+            <div class="video-meta"><span><span class="video-brand-dot" style="background:var(--noroo);"></span>노루페인트</span><span class="mono">54,900회</span></div>
+          </div>
+        </a>
+        <a class="video-card" href="#" target="_blank" rel="noopener">
+          <div class="video-thumb"><span class="video-rank mono">4</span><div class="photo-frame" style="width:100%; height:100%; border-radius:0;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></div></div>
+          <div class="video-body">
+            <div class="video-title">브랜드 캠페인 영상</div>
+            <div class="video-meta"><span><span class="video-brand-dot" style="background:var(--kcc);"></span>KCC</span><span class="mono">41,300회</span></div>
+          </div>
+        </a>
       </div>
 
       <div class="panel" style="margin-top:20px; margin-bottom:40px;">
@@ -1117,18 +1118,17 @@
     '</div>';
   }
 
-  function contentRow(item, rank, maxViews) {
-    var pct = maxViews > 0 ? Math.round((item.viewCount / maxViews) * 100) : 0;
-    return '<div class="content-row">' +
-      '<span class="rank-chip' + (rank === 1 ? ' rank-chip--top' : '') + ' mono">' + rank + '</span>' +
-      '<div class="photo-frame" style="width:40px; height:40px;">' + phFrameSvg + '</div>' +
-      '<div style="flex:1; min-width:0;">' +
-        '<div class="content-title">' + esc(item.title) + '</div>' +
-        '<div class="content-body">' + esc(item.brand) + ' · 유튜브 (실제 검색 결과)</div>' +
-        '<span class="meter" style="display:block; margin-top:6px;"><span class="meter-fill" style="width:' + pct + '%;"></span></span>' +
+  function videoCard(item, rank) {
+    var thumb = item.thumbnail
+      ? '<img src="' + esc(item.thumbnail) + '" alt="' + esc(item.title) + '" loading="lazy">'
+      : phFrameSvg;
+    return '<a class="video-card" href="' + esc(item.link) + '" target="_blank" rel="noopener">' +
+      '<div class="video-thumb"><span class="video-rank mono">' + rank + '</span>' + thumb + '</div>' +
+      '<div class="video-body">' +
+        '<div class="video-title">' + esc(item.title) + '</div>' +
+        '<div class="video-meta"><span><span class="video-brand-dot" style="background:' + outletColorVar(item.brand) + ';"></span>' + esc(item.brand) + '</span><span class="mono">' + fmtViews(item.viewCount) + '회</span></div>' +
       '</div>' +
-      '<span class="content-views mono">' + fmtViews(item.viewCount) + '</span>' +
-    '</div>';
+    '</a>';
   }
 
   fetch('/api/dashboard-data', { cache: 'no-store' })
@@ -1180,14 +1180,13 @@
         }).join('');
       }
 
-      // 신규 콘텐츠 정보 (유튜브, 조회수순)
-      var contentRowsEl = document.getElementById('panel-content-rows');
-      if (contentRowsEl && videos.length > 0) {
+      // 경쟁사 유튜브 콘텐츠 (조회수순, 실제 썸네일)
+      var videoGridEl = document.getElementById('panel-video-grid');
+      if (videoGridEl && videos.length > 0) {
         var top = videos.slice(0, 4);
-        var maxViews = Math.max.apply(null, top.map(function (v) { return v.viewCount || 0; }));
-        contentRowsEl.innerHTML = top.map(function (v, i) { return contentRow(v, i + 1, maxViews); }).join('');
-        var contentNoteEl = document.getElementById('panel-content-note');
-        if (contentNoteEl) contentNoteEl.textContent = '조회수 ↓ 정렬 · 실제 유튜브 검색 결과';
+        videoGridEl.innerHTML = top.map(function (v, i) { return videoCard(v, i + 1); }).join('');
+        var videoNoteEl = document.getElementById('panel-video-note');
+        if (videoNoteEl) videoNoteEl.textContent = '조회수 ↓ 정렬 · 실제 유튜브 검색 결과';
       }
 
       // 최근 공지사항: 자사 홈페이지 소식 추가

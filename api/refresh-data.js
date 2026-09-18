@@ -82,13 +82,18 @@ async function fetchYouTube(query, apiKey) {
     viewsById[v.id] = Number(v.statistics && v.statistics.viewCount) || 0;
   }
 
-  return items.map((it) => ({
-    title: it.snippet.title,
-    link: `https://www.youtube.com/watch?v=${it.id.videoId}`,
-    channel: it.snippet.channelTitle,
-    publishedAt: it.snippet.publishedAt,
-    viewCount: viewsById[it.id.videoId] || 0,
-  }));
+  return items.map((it) => {
+    const thumbs = it.snippet.thumbnails || {};
+    const thumbnail = (thumbs.medium || thumbs.high || thumbs.default || {}).url || null;
+    return {
+      title: it.snippet.title,
+      link: `https://www.youtube.com/watch?v=${it.id.videoId}`,
+      channel: it.snippet.channelTitle,
+      publishedAt: it.snippet.publishedAt,
+      viewCount: viewsById[it.id.videoId] || 0,
+      thumbnail,
+    };
+  });
 }
 
 const LAUNCH_KEYWORDS = ['신제품', '출시', '런칭', '리뉴얼'];
