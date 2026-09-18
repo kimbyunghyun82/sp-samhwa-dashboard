@@ -285,10 +285,33 @@
 
   .app-footer { margin-top: 8px; padding: 18px 0 0; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: var(--ink-faint); }
   .app-footer-links { display: flex; gap: 18px; }
+  #pin-gate { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--paper); padding: 20px; }
+  .pin-card { width: 320px; max-width: 100%; background: var(--surface); border: 1px solid var(--line-soft); border-radius: 16px; box-shadow: var(--shadow-2); padding: 32px 28px; text-align: center; }
+  .pin-mark { width: 44px; height: 44px; border-radius: 12px; background: var(--jade); color: #fff; display: flex; align-items: center; justify-content: center; font-family: 'IBM Plex Mono', monospace; font-weight: 700; font-size: 14px; margin: 0 auto 16px; }
+  .pin-title { font-size: 15px; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+  .pin-sub { font-size: 12px; color: var(--ink-faint); margin-bottom: 20px; line-height: 1.5; }
+  .pin-input { width: 100%; box-sizing: border-box; text-align: center; letter-spacing: 12px; font-size: 20px; font-family: 'IBM Plex Mono', monospace; padding: 12px; border: 1px solid var(--line-soft); border-radius: 10px; background: var(--surface-soft); color: var(--ink); margin-bottom: 12px; }
+  .pin-input:focus { outline: 2px solid var(--jade); outline-offset: 1px; }
+  .pin-submit { width: 100%; padding: 11px; border: none; border-radius: 10px; background: var(--jade); color: #fff; font-weight: 700; font-size: 13px; font-family: inherit; cursor: pointer; }
+  .pin-submit:hover { opacity: .92; }
+  .pin-submit:focus-visible { outline: 2px solid var(--jade); outline-offset: 2px; }
+  .pin-error { min-height: 18px; margin-top: 10px; font-size: 11.5px; color: var(--critical); }
 </style>
 </head>
 <body>
 
+<div id="pin-gate">
+  <div class="pin-card">
+    <div class="pin-mark">SP</div>
+    <div class="pin-title">SP SAMHWA 대시보드</div>
+    <div class="pin-sub">이 페이지는 접근 제한 대상입니다.<br>PIN 번호 4자리를 입력해 주세요.</div>
+    <input id="pin-input" class="pin-input" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="••••">
+    <button id="pin-submit" class="pin-submit" type="button">확인</button>
+    <div id="pin-error" class="pin-error"></div>
+  </div>
+</div>
+
+<div id="content" hidden>
 <div class="scroller">
 <div class="shell">
 
@@ -940,6 +963,7 @@
   </div>
 </div>
 </div>
+</div>
 
 <script>
 (function () {
@@ -954,6 +978,79 @@
   }
   window.addEventListener('hashchange', flashTarget);
   if (location.hash) setTimeout(flashTarget, 50);
+})();
+</script>
+
+<script>
+(function () {
+  // 정적 페이지(백엔드 없음)용 가벼운 접근 차단. 완전한 보안이 아니며,
+  // 4자리 PIN은 오프라인 무차별 대입으로 뚫릴 수 있음을 감안할 것.
+  var PIN_HASH = 'd7826181fcfacc6ace7046edeb09b66a55f02e57649f29489433a27a4c3b47ac';
+  var SESSION_KEY = 'sp_samhwa_pin_ok';
+
+  var gate = document.getElementById('pin-gate');
+  var content = document.getElementById('content');
+  var input = document.getElementById('pin-input');
+  var submitBtn = document.getElementById('pin-submit');
+  var errorEl = document.getElementById('pin-error');
+
+  function unlock() {
+    gate.hidden = true;
+    content.hidden = false;
+  }
+
+  function showError(msg) {
+    errorEl.textContent = msg;
+  }
+
+  async function sha256Hex(text) {
+    var enc = new TextEncoder().encode(text);
+    var buf = await crypto.subtle.digest('SHA-256', enc);
+    return Array.prototype.map.call(new Uint8Array(buf), function (b) {
+      return b.toString(16).padStart(2, '0');
+    }).join('');
+  }
+
+  async function tryUnlock() {
+    var val = input.value.trim();
+    if (!/^[0-9]{4}$/.test(val)) {
+      showError('4자리 숫자를 입력하세요.');
+      return;
+    }
+    submitBtn.disabled = true;
+    try {
+      var hash = await sha256Hex(val);
+      if (hash === PIN_HASH) {
+        try { sessionStorage.setItem(SESSION_KEY, '1'); } catch (e) {}
+        showError('');
+        unlock();
+      } else {
+        showError('PIN이 올바르지 않습니다.');
+        input.value = '';
+        input.focus();
+      }
+    } catch (e) {
+      showError('이 브라우저에서는 PIN 확인 기능을 사용할 수 없습니다.');
+    } finally {
+      submitBtn.disabled = false;
+    }
+  }
+
+  var alreadyAuthed = false;
+  try { alreadyAuthed = sessionStorage.getItem(SESSION_KEY) === '1'; } catch (e) {}
+  if (alreadyAuthed) {
+    unlock();
+  } else {
+    input.focus();
+  }
+
+  submitBtn.addEventListener('click', tryUnlock);
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') tryUnlock();
+  });
+  input.addEventListener('input', function () {
+    input.value = input.value.replace(/[^0-9]/g, '').slice(0, 4);
+  });
 })();
 </script>
 
