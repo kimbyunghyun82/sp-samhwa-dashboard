@@ -341,6 +341,7 @@
       <div class="legend-bar">
         <span class="legend-badge"><span class="legend-dot legend-dot--real"></span>실제 출처 링크 (클릭 가능)</span>
         <span class="legend-badge legend-badge--muted"><span class="legend-dot legend-dot--example"></span>예시 데이터 (와이어프레임용, 링크 없음)</span>
+        <span class="legend-badge" id="live-status" style="margin-left:auto;"></span>
       </div>
 
       <!-- Hero -->
@@ -531,7 +532,7 @@
       <!-- 공지사항 + 지역별 유입 현황 -->
       <div class="grid-2">
 
-        <div class="panel">
+        <div class="panel" id="panel-notices">
           <div class="panel-head"><span class="panel-title">최근 공지사항</span><span class="panel-note">대시보드 운영 로그</span></div>
           <div class="notice-row"><span class="tag-chip tag-chip--season">개편</span><span class="notice-title">대시보드 UI 리뉴얼 (SP SAMHWA 브랜드 컬러 적용)</span><span class="notice-date mono">2026.09.18</span></div>
           <div class="notice-row"><span class="tag-chip tag-chip--chance">갱신</span><span class="notice-title">아이생각 원코트 · 방수에이스 공식 제품 사진 추가</span><span class="notice-date mono">2026.09.18</span></div>
@@ -750,7 +751,8 @@
       <div class="grid-3">
 
         <div class="panel">
-          <div class="panel-head"><span class="panel-title">신제품 출시 정보</span></div>
+          <div class="panel-head"><span class="panel-title">신제품 출시 정보</span><span class="panel-note" id="panel-launch-note">예시</span></div>
+          <div id="panel-launch-rows">
           <div class="news-row">
             <div class="photo-frame" style="width:48px; height:48px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></div>
             <div style="flex:1; min-width:0;">
@@ -784,10 +786,12 @@
               </div>
             </div>
           </div>
+          </div>
         </div>
 
         <div class="panel">
-          <div class="panel-head"><span class="panel-title">신규 콘텐츠 정보</span><span class="panel-note">조회수 ↓ 정렬 · 예시</span></div>
+          <div class="panel-head"><span class="panel-title">신규 콘텐츠 정보</span><span class="panel-note" id="panel-content-note">조회수 ↓ 정렬 · 예시</span></div>
+          <div id="panel-content-rows">
           <div class="content-row">
             <span class="rank-chip rank-chip--top mono">1</span>
             <div class="photo-frame" style="width:40px; height:40px;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg></div>
@@ -828,10 +832,12 @@
             </div>
             <span class="content-views mono">41,300</span>
           </div>
+          </div>
         </div>
 
         <div class="panel">
-          <div class="panel-head"><span class="panel-title">최신 언론보도 자료</span></div>
+          <div class="panel-head"><span class="panel-title">최신 언론보도 자료</span><span class="panel-note" id="panel-press-note">실제 기사</span></div>
+          <div id="panel-press-rows">
           <div class="news-row" style="align-items:flex-start;">
             <div style="flex:1; min-width:0;">
               <div class="news-title"><span class="outlet-dot" style="background:var(--kcc);"></span>KCC, '2026 한국웰니스지수' 3개 부문 1위 (친환경페인트 5년 연속)</div>
@@ -862,13 +868,14 @@
               </div>
             </div>
           </div>
+          </div>
         </div>
 
       </div>
 
       <div class="panel" style="margin-top:20px; margin-bottom:40px;">
-        <div class="panel-head"><span class="panel-title">최신 주요 소식</span></div>
-        <div class="grid-3" style="gap:0;">
+        <div class="panel-head"><span class="panel-title">최신 주요 소식</span><span class="panel-note" id="panel-major-note">실제 기사</span></div>
+        <div class="grid-3" id="panel-major-grid" style="gap:0;">
           <div class="news-row" style="align-items:flex-start; border-right:1px solid var(--line-soft);">
             <div style="flex:1; min-width:0;">
               <div class="news-title"><span class="outlet-dot" style="background:var(--kcc);"></span>KCC, AI 조색 시스템 'KCC 스마트 3.0'·도장로봇 '스마트캔버스' 공개</div>
@@ -1051,6 +1058,158 @@
   input.addEventListener('input', function () {
     input.value = input.value.replace(/[^0-9]/g, '').slice(0, 4);
   });
+})();
+</script>
+
+<script>
+(function () {
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function fmtDate(iso) {
+    if (!iso) return '';
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return '';
+    return d.toISOString().slice(0, 10);
+  }
+  function fmtDateTime(iso) {
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return '';
+    return d.toISOString().slice(0, 16).replace('T', ' ') + ' UTC';
+  }
+  function fmtViews(n) {
+    return Number(n || 0).toLocaleString('ko-KR');
+  }
+  var reportSvg = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22V15"/></svg>';
+  var linkSvg = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>';
+  var phFrameSvg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5-4 4-3-3-6 6"/></svg>';
+
+  function outletColorVar(brand) {
+    return brand === 'KCC' ? 'var(--kcc)' : 'var(--noroo)';
+  }
+
+  function newsRowWithPhoto(item) {
+    return '<div class="news-row">' +
+      '<div class="photo-frame" style="width:48px; height:48px;">' + phFrameSvg + '</div>' +
+      '<div style="flex:1; min-width:0;">' +
+        '<div class="news-title"><span class="outlet-dot" style="background:' + outletColorVar(item.brand) + ';"></span>' + esc(item.title) + '</div>' +
+        '<div class="news-body">' + fmtDate(item.pubDate) + ' (실제 뉴스 검색 결과)</div>' +
+        '<div class="news-meta">' +
+          '<a class="link-real" href="' + esc(item.link) + '" target="_blank" rel="noopener">' + linkSvg + '출처</a>' +
+          '<span class="ghost-btn">' + reportSvg + '신고</span>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function newsRowFlat(item) {
+    return '<div class="news-row" style="align-items:flex-start;">' +
+      '<div style="flex:1; min-width:0;">' +
+        '<div class="news-title"><span class="outlet-dot" style="background:' + outletColorVar(item.brand) + ';"></span>' + esc(item.title) + '</div>' +
+        '<div class="news-body">Google 뉴스 · <span class="mono">' + fmtDate(item.pubDate) + '</span> (실제 기사)</div>' +
+        '<div class="news-meta">' +
+          '<a class="link-real" href="' + esc(item.link) + '" target="_blank" rel="noopener">' + linkSvg + '출처</a>' +
+          '<span class="ghost-btn">' + reportSvg + '신고</span>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function contentRow(item, rank, maxViews) {
+    var pct = maxViews > 0 ? Math.round((item.viewCount / maxViews) * 100) : 0;
+    return '<div class="content-row">' +
+      '<span class="rank-chip' + (rank === 1 ? ' rank-chip--top' : '') + ' mono">' + rank + '</span>' +
+      '<div class="photo-frame" style="width:40px; height:40px;">' + phFrameSvg + '</div>' +
+      '<div style="flex:1; min-width:0;">' +
+        '<div class="content-title">' + esc(item.title) + '</div>' +
+        '<div class="content-body">' + esc(item.brand) + ' · 유튜브 (실제 검색 결과)</div>' +
+        '<span class="meter" style="display:block; margin-top:6px;"><span class="meter-fill" style="width:' + pct + '%;"></span></span>' +
+      '</div>' +
+      '<span class="content-views mono">' + fmtViews(item.viewCount) + '</span>' +
+    '</div>';
+  }
+
+  fetch('/api/dashboard-data', { cache: 'no-store' })
+    .then(function (r) { if (!r.ok) throw new Error('not ready'); return r.json(); })
+    .then(function (data) {
+      var news = (data.competitorNews || []).slice();
+      var videos = (data.competitorVideos || []).slice();
+      var ownNews = (data.ownNews || []).slice();
+
+      // 신제품 출시 정보
+      var launchRowsEl = document.getElementById('panel-launch-rows');
+      if (launchRowsEl) {
+        var launches = news.filter(function (n) { return n.isLaunch; }).slice(0, 3);
+        var launchNote = '실제 뉴스 검색 결과';
+        if (launches.length === 0) {
+          launches = news.slice(0, 3);
+          launchNote = '신제품 키워드 매치 없음 · 최신 기사로 대체';
+        }
+        if (launches.length > 0) {
+          launchRowsEl.innerHTML = launches.map(newsRowWithPhoto).join('');
+          var launchNoteEl = document.getElementById('panel-launch-note');
+          if (launchNoteEl) launchNoteEl.textContent = launchNote;
+        }
+      }
+
+      // 최신 언론보도 자료 (상위 3)
+      var pressRowsEl = document.getElementById('panel-press-rows');
+      var pressItems = news.slice(0, 3);
+      if (pressRowsEl && pressItems.length > 0) {
+        pressRowsEl.innerHTML = pressItems.map(newsRowFlat).join('');
+      }
+
+      // 최신 주요 소식 (다음 3)
+      var majorGridEl = document.getElementById('panel-major-grid');
+      var majorItems = news.slice(3, 6);
+      if (majorGridEl && majorItems.length > 0) {
+        majorGridEl.innerHTML = majorItems.map(function (item, i) {
+          var borderStyle = i < majorItems.length - 1 ? ' border-right:1px solid var(--line-soft);' : '';
+          return '<div class="news-row" style="align-items:flex-start;' + borderStyle + '">' +
+            '<div style="flex:1; min-width:0;">' +
+              '<div class="news-title"><span class="outlet-dot" style="background:' + outletColorVar(item.brand) + ';"></span>' + esc(item.title) + '</div>' +
+              '<div class="news-body">Google 뉴스 · <span class="mono">' + fmtDate(item.pubDate) + '</span> (실제 기사)</div>' +
+              '<div class="news-meta">' +
+                '<a class="link-real" href="' + esc(item.link) + '" target="_blank" rel="noopener">' + linkSvg + '출처</a>' +
+                '<span class="ghost-btn">' + reportSvg + '신고</span>' +
+              '</div>' +
+            '</div>' +
+          '</div>';
+        }).join('');
+      }
+
+      // 신규 콘텐츠 정보 (유튜브, 조회수순)
+      var contentRowsEl = document.getElementById('panel-content-rows');
+      if (contentRowsEl && videos.length > 0) {
+        var top = videos.slice(0, 4);
+        var maxViews = Math.max.apply(null, top.map(function (v) { return v.viewCount || 0; }));
+        contentRowsEl.innerHTML = top.map(function (v, i) { return contentRow(v, i + 1, maxViews); }).join('');
+        var contentNoteEl = document.getElementById('panel-content-note');
+        if (contentNoteEl) contentNoteEl.textContent = '조회수 ↓ 정렬 · 실제 유튜브 검색 결과';
+      }
+
+      // 최근 공지사항: 자사 홈페이지 소식 추가
+      var noticesEl = document.getElementById('panel-notices');
+      if (noticesEl && ownNews.length > 0) {
+        var extra = ownNews.slice(0, 2).map(function (n) {
+          return '<div class="notice-row"><span class="tag-chip" style="background:var(--jade-soft); color:var(--jade);">자사</span>' +
+            '<span class="notice-title"><a href="' + esc(n.link) + '" target="_blank" rel="noopener">' + esc(n.title) + '</a></span>' +
+            '<span class="notice-date mono">' + fmtDate(n.pubDate).replace(/-/g, '.') + '</span></div>';
+        }).join('');
+        noticesEl.insertAdjacentHTML('beforeend', extra);
+      }
+
+      // 상단 실시간 연동 상태
+      var liveStatusEl = document.getElementById('live-status');
+      if (liveStatusEl) {
+        liveStatusEl.innerHTML = '<span class="legend-dot legend-dot--real"></span>실시간 연동됨 · ' + fmtDateTime(data.generatedAt) + ' 갱신 (Google 뉴스·유튜브·자사 홈페이지)';
+      }
+    })
+    .catch(function () {
+      // 데이터가 아직 없거나 fetch 실패 시 기존 예시 값을 그대로 둔다 (조용히 무시)
+    });
 })();
 </script>
 

@@ -6,3 +6,5 @@ canvas.json
 sp-samhwa-dashboard-wireframe.html
 
 .vercel
+.env*
+.cron_secret.local
